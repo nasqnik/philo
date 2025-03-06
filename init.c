@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:03 by anikitin          #+#    #+#             */
-/*   Updated: 2025/02/26 12:50:15 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:51:13 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,29 @@ void initialize_forks(t_info *info)
         i++;
     }
 }
+
+int initialize_philos(t_info *info)
+{
+    unsigned long long i;
+    struct timeval time;
+
+    i = 0;
+    info->philos = malloc(sizeof(t_philo) * info->num_philo);
+    if (!info->philos)
+        return (free(info->forks), 1);
+    while (i < info->num_philo)
+    {
+        info->philos[i].id = i + 1;
+        info->philos[i].left_fork = i;
+        info->philos[i].right_fork = (i + 1) % info->num_philo;
+
+        info->philos[i].shared_info = info;
+        i++;
+    }
+    
+    return 0;
+}
+
 int initialize(t_info *info, int argc, char **argv)
 {
     info->num_philo = ft_atoll(argv[1]);
@@ -44,10 +67,15 @@ int initialize(t_info *info, int argc, char **argv)
         return 0;
     info->forks = malloc(sizeof(int) * info->num_philo);
     if (!info->forks)
-        return (printf("Error: malloc failed in initialize\n"), 1);
+        return (printf("Error: malloc failed\n"), 1);
     initialize_forks(info);
+    if (initialize_philos(info))
+        return (printf("Error: malloc failed\n"), 1);;
     for (unsigned long long i = 0; i < info->num_philo; i++)
-        printf("philo %llu fork: %i\n", i + 1, info->forks[i]);    
+    {
+        printf("philo %u fork: %i\n", info->philos[i].id, info->forks[i]);
+        printf("left_fork: %i right_fork: %i\n", info->philos[i].left_fork, info->philos[i].right_fork);
+    }
 
     return 0;
 }
