@@ -6,39 +6,32 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:05:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/02/25 13:38:47 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:28:35 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	ft_atoi(const char *str)
+long long ft_atoll(const char *str)
 {
-	int					sign;
-	unsigned long long	result;
+	long long	nb;
+	int			i;
 
-	sign = 1;
-	result = 0;
+	nb = 0;
+	i = 0;
 	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
 		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
+	while (str[i])
+		i++;
+	if (i > 9)
+		return (LLONG_MAX);
 	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + *str - '0';
-		if (sign == -1 && result >= LLONG_MAX)
-			return (2147483649);
-		if (result >= LLONG_MAX)
-			return (2147483649);
+		nb = nb * 10 + *str - '0';
 		str++;
 	}
-	return (result * sign);
+	return (nb);
 }
-
 
 int check_args(int argc, char **argv)
 {
