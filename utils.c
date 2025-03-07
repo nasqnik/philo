@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:05:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/02/26 12:28:35 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:27:32 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,36 @@ int check_args(int argc, char **argv)
         i++;
     }
     return (0);
+}
+
+long long current_time(void)
+{
+    struct timeval time;
+    
+    gettimeofday(&time, NULL);
+    return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void free_struct(t_info *info, int flag)
+{
+    unsigned long long i;
+    
+    if (info->forks)
+        free(info->forks);
+    if (info->philos)
+        free(info->philos);
+
+    i = 0;
+    if (flag)
+    {
+        while (i < info->num_philo)
+        {
+            pthread_mutex_destroy(&info->mutex_fork[i]);
+            i++;
+        }
+        pthread_mutex_destroy(&info->mutex_death);
+        pthread_mutex_destroy(&info->mutex_eat);
+        pthread_mutex_destroy(&info->mutex_print);
+        free(info->mutex_fork);
+    }
 }

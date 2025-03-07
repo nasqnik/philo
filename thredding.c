@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   thredding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 14:54:45 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/07 14:45:26 by anikitin         ###   ########.fr       */
+/*   Created: 2025/03/07 14:45:53 by anikitin          #+#    #+#             */
+/*   Updated: 2025/03/07 14:48:01 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int main(int argc, char **argv)
+int start_thredding(t_info *info)
 {
-    t_info info;
+    unsigned long long i;
+
+    i = 0;
+
+    while (i < info->num_philo)
     
-    if (!(argc >= 5 && argc <= 6))
-        return (printf("Error: enter correct amount of arguments\n"), 1);
-    if (check_args(argc, argv))
-        return (printf("Error: the arguments should have numeric format and can't be negative\n"), 1);
-    if (initialize(&info, argc, argv))
-        return 1;
-    if (start_thredding(&info))
-        return 1;
-    free_struct(&info, 1);
     return 0;
+
 }

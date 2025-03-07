@@ -5,7 +5,7 @@ RM 			= rm -rf
 NAME		= philo
 HEADER		= philo.h
 
-SRC			= main.c utils.c init.c
+SRC			= main.c utils.c init.c thredding.c
 
 OBJ			= $(SRC:%.c=%.o)
 
