@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:05:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/07 14:27:32 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:54:40 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,27 @@ void free_struct(t_info *info, int flag)
         pthread_mutex_destroy(&info->mutex_print);
         free(info->mutex_fork);
     }
+}
+
+int printer(t_info *info, int id, int status)
+{
+    pthread_mutex_lock(&info->mutex_print);
+    if (status == DEAD)
+        printf("%llu %i philo died\n", current_time() - info->start_time, id);
+    if (dead(info) == 1)
+        return (pthread_mutex_unlock(&info->mutex_print), 1);
+    else
+    {
+        printf("%llu %i philo ", current_time() - info->start_time, id);
+        if (status == FORK)
+            printf("has taken a fork\n");
+        else if (status == EAT)
+            printf("is eating\n");
+        else if (status == SLEEP)
+            printf("is sleeping\n");
+        else if (status == THINK)
+            printf("is thinking\n");
+    }
+    pthread_mutex_unlock(&info->mutex_print);
+    return (0);
 }
