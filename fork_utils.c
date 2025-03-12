@@ -18,10 +18,10 @@ int check_forks(t_philo *philo, int first_fork, int second_fork)
     int second;
 
     pthread_mutex_lock(&philo->shared_info->mutex_fork[first_fork]);
-    first = &philo->shared_info->forks[first_fork];
+    first = philo->shared_info->forks[first_fork];
     pthread_mutex_unlock(&philo->shared_info->mutex_fork[first_fork]);
     pthread_mutex_lock(&philo->shared_info->mutex_fork[second_fork]);
-    second = &philo->shared_info->forks[second_fork];
+    second = philo->shared_info->forks[second_fork];
     pthread_mutex_unlock(&philo->shared_info->mutex_fork[second_fork]);
     if (first != philo->id && second != philo->id)
         return (1);

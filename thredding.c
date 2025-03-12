@@ -26,6 +26,14 @@ int dead(t_info *info)
     return res;
 }
 
+void one_philo_routine(t_philo *philo)
+{
+    ft_usleep(philo->shared_info->time_die, philo);
+    pthread_mutex_lock(&philo->shared_info->mutex_death);
+    philo->shared_info->dead = 1;
+    pthread_mutex_unlock(&philo->shared_info->mutex_death);
+    printer(philo->shared_info, philo->id, DEAD);
+}
 
 void *routine(void *args)
 {
@@ -34,6 +42,11 @@ void *routine(void *args)
     int second_fork;
 
     philo = (t_philo *)args;
+    if (philo->shared_info->num_philo == 1)
+    {
+        one_philo_routine(philo);
+        return (NULL);
+    }
     while (dead(philo->shared_info) == 0)
     {
         lock_order(philo, &first_fork, &second_fork);
@@ -42,15 +55,13 @@ void *routine(void *args)
             lock_forks(philo, first_fork, second_fork);
             if (eat(philo))
                 return (unlock_forks(philo, first_fork, second_fork), NULL);
-            
+            if (p_sleep(philo) == 1)
+                return (NULL);
+            if (think(philo) == 1)
+                return (NULL);
         }
     }
     return (NULL);
-}
-
-void *monitor(void *args)
-{
-    
 }
 
 int start_thredding(t_info *info)

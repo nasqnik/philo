@@ -31,9 +31,7 @@ int initialize_mutexes(t_info *info)
         pthread_mutex_init(&info->mutex_print, NULL) ||
         pthread_mutex_init(&info->mutex_eat, NULL))
         return (1);
-    
     return (0);
-    
 }
 
 int initialize_forks(t_info *info)

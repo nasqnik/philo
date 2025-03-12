@@ -55,7 +55,8 @@ int check_args(int argc, char **argv)
     return (0);
 }
 
-long long current_time(void)
+
+unsigned long long current_time(void)
 {
     struct timeval time;
     

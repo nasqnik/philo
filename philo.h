@@ -31,9 +31,9 @@ typedef struct s_info
     unsigned long long	time_sleep;
     long long			eat_times;
     int					*forks;
-    t_philo				*philos;
     long long			start_time;
 	unsigned int		dead;
+    t_philo				*philos;
     pthread_t           monitor;
 
 	pthread_mutex_t 	*mutex_fork;
@@ -49,7 +49,7 @@ typedef struct s_philo
     int					right_fork;
     int					left_fork;
     long long			last_meal_time;
-    int					meal_count;
+    unsigned long long	meal_count;
     t_info				*shared_info; 
     pthread_t           thread_id;
      
@@ -65,26 +65,34 @@ typedef enum t_status
 }						t_status;
 
 // utils.c
-long long	ft_atoll(const char *str);
-int			check_args(int argc, char **argv);
-long long	current_time(void);
-void		free_struct(t_info *info, int flag);
-int         printer(t_info *info, int id, int status);
+long long	        ft_atoll(const char *str);
+int			        check_args(int argc, char **argv);
+unsigned long long	current_time(void);
+void		        free_struct(t_info *info, int flag);
+int                 printer(t_info *info, int id, int status);
 
 // init.c
-int			initialize(t_info *info, int argc, char **argv);
+int			        initialize(t_info *info, int argc, char **argv);
 
 // thredding.c
-int         start_thredding(t_info *info);
+int                 dead(t_info *info);
+int                 start_thredding(t_info *info);
 
 // fork_utils.c
-void        lock_forks(t_philo *philo, int first_fork, int second_fork);
-void        unlock_forks(t_philo *philo, int first_fork, int second_fork);
-void        lock_order(t_philo *philo, int *first_fork, int *second_fork);
-int         check_forks(t_philo *philo, int first_fork, int second_fork);
+void                lock_forks(t_philo *philo, int first_fork, int second_fork);
+void                unlock_forks(t_philo *philo, int first_fork, int second_fork);
+void                lock_order(t_philo *philo, int *first_fork, int *second_fork);
+int                 check_forks(t_philo *philo, int first_fork, int second_fork);
 
 // actions.c
-int         eat(t_philo *philo);
+int                 eat(t_philo *philo);
+int                 p_sleep(t_philo *philo);
+int                 think(t_philo *philo);
+int                 ft_usleep(unsigned long long time, t_philo *philo);
+
+// monitor.c
+void                *monitor(void *args);
+
 
 
 #endif
