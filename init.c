@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:03 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/10 13:32:17 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:11:48 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int initialize_mutexes(t_info *info)
 {
     unsigned long long i;
-    // do we need to initialize mutex before destroying it actually?
     
     i = 0;
     info->mutex_fork = malloc(sizeof(pthread_mutex_t) * info->num_philo);
@@ -23,7 +22,7 @@ int initialize_mutexes(t_info *info)
         return (1);
     while (i < info->num_philo)
     {
-        if (pthread_mutex_init(&info->mutex_fork[i], NULL)) // why NULL?
+        if (pthread_mutex_init(&info->mutex_fork[i], NULL))
             return (1);
         i++;
     }
@@ -39,6 +38,9 @@ int initialize_forks(t_info *info)
     unsigned long long i;
     
     i = 0;
+    info->forks = malloc(sizeof(int) * info->num_philo);
+    if (!info->forks)
+        return (printf("Error: malloc failed\n"), 1);
     while (i < info->num_philo)
     {
         if (i == 0 || i == info->num_philo - 1)
@@ -71,7 +73,6 @@ int initialize_philos(t_info *info)
         info->philos[i].shared_info = info;
         i++;
     }
-    
     return 0;
 }
 
@@ -91,11 +92,8 @@ int initialize_info(t_info *info, int argc, char **argv)
     if (info->num_philo >= INT_MAX || info->time_die >= INT_MAX || info->time_eat >= INT_MAX
         || info->time_sleep >= INT_MAX || (argc == 6 && info->eat_times >= INT_MAX))
         return (printf("Error: argument is bigger than an int\n"), 1); // check the INT_MAX
-    if (argc == 6 && info->eat_times == 0)
+    if (argc == 6 && info->eat_times == 0) // what should we do?
         return 0;
-    info->forks = malloc(sizeof(int) * info->num_philo);
-    if (!info->forks)
-        return (printf("Error: malloc failed\n"), 1);
     return 0;
 }
 
@@ -106,7 +104,8 @@ int initialize(t_info *info, int argc, char **argv)
         return 1;
     if (info->eat_times == 0)
         return 0;
-    initialize_forks(info);
+    if (initialize_forks(info))
+        return (free_struct(info, 0), 1);
     if (initialize_philos(info))
         return (free_struct(info, 0), 1);
     if (initialize_mutexes(info))

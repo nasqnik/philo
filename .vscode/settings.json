@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "__mutex_base": "c"
+        "__mutex_base": "c",
+        "memory": "c",
+        "utility": "c"
     }
 }

@@ -45,7 +45,7 @@ void *monitor(void *args)
             pthread_mutex_lock(&info->mutex_eat);
             if (info->eat_times > 0 && check_meal_num(info))
                 return (done_meal_num(info), NULL);
-            if (current_time() > info->philos[i].last_meal_time + info->time_die)
+            if (current_time() > (info->philos[i].last_meal_time + info->time_die))
                 return (philo_death(info, i), NULL);
             pthread_mutex_unlock(&info->mutex_eat);
             i++;

@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:33:33 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/11 13:56:49 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:25:54 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_usleep(unsigned long long time, t_philo *philo)
     unsigned long long start;
 
     start = current_time();
-    while (current_time() < (start + time))
+    while ((current_time() - start) < time)
     {
         if (dead(philo->shared_info))
             return 1;
@@ -61,7 +61,7 @@ int eat(t_philo *philo)
     philo->meal_count++;
     pthread_mutex_unlock(&philo->shared_info->mutex_eat);
     philo->shared_info->forks[philo->left_fork] = philo->id;
-    philo->shared_info->forks[philo->left_fork] = philo->id;
+    philo->shared_info->forks[philo->right_fork] = philo->id;
     unlock_forks(philo, first_fork, second_fork);
     return (0);
 }
