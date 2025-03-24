@@ -6,7 +6,7 @@ NAME		= philo
 HEADER		= philo.h
 
 SRC			= main.c utils.c init.c thredding.c fork_utils.c actions.c monitor.c
-
+			
 OBJ			= $(SRC:%.c=%.o)
 
 all:		$(NAME)
