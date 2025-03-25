@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:05:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/14 14:51:04 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:59:56 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,41 @@
 
 long long ft_atoll(const char *str)
 {
-	long long	nb;
-	int			i;
+    long long	nb;
+	int			digit;
 
 	nb = 0;
-	i = 0;
 	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
 		str++;
-	while (str[i])
-		i++;
-	if (i > 9)
-		return (LLONG_MAX);
+    if (*str == '+')
+    {
+        str++;
+    }
 	while (*str >= '0' && *str <= '9')
 	{
-		nb = nb * 10 + *str - '0';
+		digit = *str - '0';
+		if (nb > (LLONG_MAX - digit) / 10)
+			return (LLONG_MAX);
+		nb = nb * 10 + digit;
 		str++;
 	}
 	return (nb);
+	// long long	nb;
+	// int			i;
+
+	// nb = 0;
+	// i = 0;
+	// while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+	// 	str++;
+	// while (str[i])
+	// 	i++;
+	// if (i > 9)
+	// 	return (LLONG_MAX);
+	// while (*str >= '0' && *str <= '9')
+	// {
+	// 	nb = nb * 10 + *str - '0';
+	// 	str++;
+	// }
 }
 
 int check_args(int argc, char **argv)
@@ -44,9 +62,13 @@ int check_args(int argc, char **argv)
         j = 0;
         if (!argv[i][j])
             return 1;
+        while (argv[i][j] == ' ' || (argv[i][j] >= '\t' && argv[i][j] <= '\r'))
+		    j++;
+        if (argv[i][j] == '+')
+            j++;
         while (argv[i][j])
         {
-            if (!(argv[i][j] >= '0' && argv[i][j] <= '9')) // plus is fine
+            if (!(argv[i][j] >= '0' && argv[i][j] <= '9')) // plus is fine?
                 return (1);
             j++;
         }

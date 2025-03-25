@@ -1,6 +1,0 @@
-- Fix atoi to atoll
-
-./philo 15464646859 2 3 4 5
-num of philo: -1715222325
-
-do we need to somehow restrict the num of philos?

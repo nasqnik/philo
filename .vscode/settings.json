@@ -1,7 +1,5 @@
 {
     "files.associations": {
-        "__mutex_base": "c",
-        "memory": "c",
-        "utility": "c"
+        "sstream": "c"
     }
 }

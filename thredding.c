@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:45:53 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/14 15:24:28 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:49:02 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void one_philo_routine(t_philo *philo)
 void *routine(void *args)
 {
     t_philo *philo;
-    int first_fork; // whyyyyyy?
+    int first_fork; 
     int second_fork;
 
     philo = (t_philo *)args;

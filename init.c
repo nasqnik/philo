@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:03 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/14 14:11:48 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:17:02 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int initialize_info(t_info *info, int argc, char **argv)
     info->forks = NULL;
     if (argc == 6)
         info->eat_times = ft_atoll(argv[5]);
-    if (info->num_philo >= INT_MAX || info->time_die >= INT_MAX || info->time_eat >= INT_MAX
-        || info->time_sleep >= INT_MAX || (argc == 6 && info->eat_times >= INT_MAX))
-        return (printf("Error: argument is bigger than an int\n"), 1); // check the INT_MAX
+    if (info->num_philo > INT_MAX || info->time_die > INT_MAX || info->time_eat > INT_MAX
+        || info->time_sleep > INT_MAX || (argc == 6 && info->eat_times > INT_MAX))
+        return (printf("Error: argument is bigger than an int\n"), 1);
     if (argc == 6 && info->eat_times == 0) // what should we do?
         return 0;
     return 0;
@@ -110,7 +110,6 @@ int initialize(t_info *info, int argc, char **argv)
         return (free_struct(info, 0), 1);
     if (initialize_mutexes(info))
         return (free_struct(info, 0), printf("Error: Mutex init failed\n"), 1);
-        
     // printf("start time: %lld\n", info->start_time);
     // for (unsigned long long i = 0; i < info->num_philo; i++)
     // {
