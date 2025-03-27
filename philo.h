@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:57:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/25 12:25:51 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:17:52 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_info
 	unsigned int		dead;
 	t_philo				*philos;
 	pthread_t			monitor;
-
 	pthread_mutex_t		*mutex_fork;
 	pthread_mutex_t		mutex_death;
 	pthread_mutex_t		mutex_print;
@@ -62,13 +61,6 @@ typedef enum t_status
 	DEAD
 }						t_status;
 
-// utils.c
-long long			ft_atoll(const char *str);
-int					check_args(int argc, char **argv);
-unsigned long long	current_time(void);
-void				free_struct(t_info *info, int flag);
-int					printer(t_info *info, int id, int status);
-
 // init.c
 int					initialize(t_info *info, int argc, char **argv);
 
@@ -92,5 +84,14 @@ int					ft_usleep(unsigned long long time, t_philo *philo);
 
 // monitor.c
 void				*monitor(void *args);
+
+// philo_utils.c
+long long			ft_atoll(const char *str);
+unsigned long long	current_time(void);
+void				free_struct(t_info *info, int flag);
+int					printer(t_info *info, int id, int status);
+
+// parsing_utils.c
+int					check_args(int argc, char **argv);
 
 #endif

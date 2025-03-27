@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:03 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/25 12:30:39 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:55:45 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	initialize_forks(t_info *info)
 	info->forks = malloc(sizeof(int) * info->num_philo);
 	if (!info->forks)
 		return (printf("Error: malloc failed\n"), 1);
+	// printf("_______\n");
 	while (i < info->num_philo)
 	{
 		if (i == 0 || i == info->num_philo - 1)
@@ -49,6 +50,7 @@ int	initialize_forks(t_info *info)
 			info->forks[i] = i + 2;
 		else
 			info->forks[i] = i + 1;
+			// printf("fork %llu: %i\n", i, info->forks[i]);
 		i++;
 	}
 	return (0);
@@ -71,6 +73,7 @@ int	initialize_philos(t_info *info)
 		info->philos[i].last_meal_time = info->start_time;
 		info->philos[i].meal_count = 0;
 		info->philos[i].shared_info = info;
+		// printf("______\nphilo %i\nleft_f: %d\nright_f: %d\nlast_meal: %lld\nmeal_count: %llu\n", info->philos[i].id, info->philos[i].left_fork, info->philos[i].right_fork, info->philos[i].last_meal_time, info->philos[i].meal_count);
 		i++;
 	}
 	return (0);
@@ -92,8 +95,9 @@ int	initialize_info(t_info *info, int argc, char **argv)
 		|| info->time_eat > INT_MAX || info->time_sleep > INT_MAX
 		|| (argc == 6 && info->eat_times > INT_MAX))
 		return (printf("Error: argument is bigger than an int\n"), 1);
-	if (argc == 6 && info->eat_times == 0)
+	if (info->eat_times == 0)
 		return (0);
+	// printf("num_philo: %llu\ntime_die: %llu\ntime_eat: %llu\ntime_sleep: %llu\neat_times: %lld\ndead: %u\n", info->num_philo, info->time_die, info->time_eat, info->time_sleep, info->eat_times, info->dead);
 	return (0);
 }
 

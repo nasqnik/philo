@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:45:53 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/25 12:29:47 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:19:46 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	dead(t_info *info)
 void	one_philo_routine(t_philo *philo)
 {
 	ft_usleep(philo->shared_info->time_die, philo);
-	pthread_mutex_lock(&philo->shared_info->mutex_death);
+	// pthread_mutex_lock(&philo->shared_info->mutex_death); // one philo needs mutex?
 	philo->shared_info->dead = 1;
-	pthread_mutex_unlock(&philo->shared_info->mutex_death);
+	// pthread_mutex_unlock(&philo->shared_info->mutex_death);
 	printer(philo->shared_info, philo->id, DEAD);
 }
 
