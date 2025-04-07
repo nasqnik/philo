@@ -51,7 +51,7 @@ void	*routine(void *args)
 		if (check_forks(philo, first_fork, second_fork))
 		{
 			lock_forks(philo, first_fork, second_fork);
-			if (eat(philo))
+			if (eat(philo, first_fork, second_fork))
 				return (unlock_forks(philo, first_fork, second_fork), NULL);
 			if (p_sleep(philo) == 1)
 				return (NULL);

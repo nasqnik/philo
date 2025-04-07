@@ -30,14 +30,12 @@ int	check_forks(t_philo *philo, int first_fork, int second_fork)
 
 void	lock_forks(t_philo *philo, int first_fork, int second_fork)
 {
-	lock_order(philo, &first_fork, &second_fork);
 	pthread_mutex_lock(&philo->shared_info->mutex_fork[first_fork]);
 	pthread_mutex_lock(&philo->shared_info->mutex_fork[second_fork]);
 }
 
 void	unlock_forks(t_philo *philo, int first_fork, int second_fork)
 {
-	lock_order(philo, &first_fork, &second_fork);
 	pthread_mutex_unlock(&philo->shared_info->mutex_fork[first_fork]);
 	pthread_mutex_unlock(&philo->shared_info->mutex_fork[second_fork]);
 }

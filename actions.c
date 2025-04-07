@@ -42,12 +42,8 @@ int	p_sleep(t_philo *philo)
 	return (0);
 }
 
-int	eat(t_philo *philo)
+int	eat(t_philo *philo, int first_fork, int second_fork)
 {
-	int	first_fork;
-	int	second_fork;
-
-	lock_order(philo, &first_fork, &second_fork);
 	if (printer(philo->shared_info, philo->id, FORK) == 1)
 		return (1);
 	if (printer(philo->shared_info, philo->id, FORK) == 1)

@@ -79,7 +79,7 @@ void				lock_order(t_philo *philo, int *first_fork,
 int					check_forks(t_philo *philo, int first_fork, int second_for);
 
 // actions.c
-int					eat(t_philo *philo);
+int	eat(t_philo *philo, int first_fork, int second_fork);
 int					p_sleep(t_philo *philo);
 int					think(t_philo *philo);
 int					ft_usleep(unsigned long long time, t_philo *philo);
