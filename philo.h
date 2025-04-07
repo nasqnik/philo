@@ -61,8 +61,6 @@ typedef enum t_status
 	DEAD
 }						t_status;
 
-int error(int msg);
-
 // init.c
 int					initialize(t_info *info, int argc, char **argv);
 
@@ -79,7 +77,7 @@ void				lock_order(t_philo *philo, int *first_fork,
 int					check_forks(t_philo *philo, int first_fork, int second_for);
 
 // actions.c
-int	eat(t_philo *philo, int first_fork, int second_fork);
+int					eat(t_philo *philo, int first_fork, int second_fork);
 int					p_sleep(t_philo *philo);
 int					think(t_philo *philo);
 int					ft_usleep(unsigned long long time, t_philo *philo);
@@ -95,5 +93,6 @@ int					printer(t_info *info, int id, int status);
 
 // parsing_utils.c
 int					check_args(int argc, char **argv);
+int					error(int msg);
 
 #endif

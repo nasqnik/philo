@@ -12,30 +12,6 @@
 
 #include "philo.h"
 
-int error(int msg)
-{
-	char *str;
-
-	str = NULL;
-	if (msg == 1)
-		str = "Error: enter correct amount of arguments";
-	else if (msg == 2)
-		str = "Error: incorrect argument type";
-	else if (msg == 3)
-		str = "Error: argument is bigger than an int";
-	else if (msg == 4)
-		str = "Error: malloc failed";
-	else if (msg == 5)
-		str = "Error: mutex_init failed";
-	else if (msg == 6)
-		str = "Error: pthread_create failed";
-	else if (msg == 7)
-		str = "Error: pthread_join failed";
-	if (str != NULL)
-		printf("%s\n", str);
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_info	info;
