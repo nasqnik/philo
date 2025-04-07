@@ -27,6 +27,10 @@ int error(int msg)
 		str = "Error: malloc failed";
 	else if (msg == 5)
 		str = "Error: mutex_init failed";
+	else if (msg == 6)
+		str = "Error: pthread_create failed";
+	else if (msg == 7)
+		str = "Error: pthread_join failed";
 	if (str != NULL)
 		printf("%s\n", str);
 	return (1);

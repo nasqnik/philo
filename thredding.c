@@ -29,9 +29,7 @@ int	dead(t_info *info)
 void	one_philo_routine(t_philo *philo)
 {
 	ft_usleep(philo->shared_info->time_die, philo);
-	// pthread_mutex_lock(&philo->shared_info->mutex_death); // one philo needs mutex?
 	philo->shared_info->dead = 1;
-	// pthread_mutex_unlock(&philo->shared_info->mutex_death);
 	printer(philo->shared_info, philo->id, DEAD);
 }
 
@@ -73,21 +71,21 @@ int	start_thredding(t_info *info)
 	{
 		if (pthread_create(&info->philos[i].thread_id, NULL,
 				&routine, &info->philos[i]))
-			return (printf("Error: pthread_create failed\n"), 1);
+			return (error(6));
 		i++;
 	}
 	if (info->num_philo > 1)
 	{
 		if (pthread_create(&info->monitor, NULL, &monitor, info))
-			return (printf("Error: pthread_create failed\n"), 1);
+			return (error(6));
 		if (pthread_join(info->monitor, NULL))
-			return (printf("Error: pthread_join failed\n"), 1);
+			return (error(7));
 	}
 	i = 0;
 	while (i < info->num_philo)
 	{
 		if (pthread_join(info->philos[i].thread_id, NULL))
-			return (printf("Error: pthread_join failed\n"), 1);
+			return (error(7));
 		i++;
 	}
 	return (0);
