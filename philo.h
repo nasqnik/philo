@@ -29,7 +29,7 @@ typedef struct s_info
 	unsigned long long	time_eat;
 	unsigned long long	time_sleep;
 	long long			eat_times;
-	int					*forks;
+	int					*fork_last_owner;
 	long long			start_time;
 	unsigned int		dead;
 	t_philo				*philos;
@@ -60,6 +60,8 @@ typedef enum t_status
 	THINK,
 	DEAD
 }						t_status;
+
+int error(int msg);
 
 // init.c
 int					initialize(t_info *info, int argc, char **argv);

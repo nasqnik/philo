@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-long long	ft_atoll(const char *str) // check atoll before submission
+long long	ft_atoll(const char *str)
 {
 	long long	nb;
 	int			digit;
@@ -47,8 +47,8 @@ void	free_struct(t_info *info, int flag)
 {
 	unsigned long long	i;
 
-	if (info->forks)
-		free(info->forks);
+	if (info->fork_last_owner)
+		free(info->fork_last_owner);
 	if (info->philos)
 		free(info->philos);
 	i = 0;

@@ -12,14 +12,34 @@
 
 #include "philo.h"
 
+int error(int msg)
+{
+	char *str;
+
+	str = NULL;
+	if (msg == 1)
+		str = "Error: enter correct amount of arguments";
+	else if (msg == 2)
+		str = "Error: incorrect argument type";
+	else if (msg == 3)
+		str = "Error: argument is bigger than an int";
+	else if (msg == 4)
+		str = "Error: malloc failed";
+	else if (msg == 5)
+		str = "Error: mutex_init failed";
+	if (str != NULL)
+		printf("%s\n", str);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
 	if (!(argc >= 5 && argc <= 6))
-		return (printf("Error: enter correct amount of arguments\n"), 1);
+		return (error(1));
 	if (check_args(argc, argv))
-		return (printf("Error: incorrect argument type\n"), 1);
+		return (error(2));
 	if (initialize(&info, argc, argv))
 		return (1);
 	if (start_thredding(&info))
