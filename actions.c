@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:33:33 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/26 14:40:38 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:13:28 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ int	eat(t_philo *philo, int first_fork, int second_fork)
 		return (1);
 	if (printer(philo->shared_info, philo->id, EAT) == 1)
 		return (1);
-	if (ft_usleep(philo->shared_info->time_eat, philo) == 1)
-		return (1);
 	pthread_mutex_lock(&philo->shared_info->mutex_eat);
 	philo->last_meal_time = current_time();
 	philo->meal_count++;
+	philo->is_eating = 1;
+	pthread_mutex_unlock(&philo->shared_info->mutex_eat);
+	if (ft_usleep(philo->shared_info->time_eat, philo) == 1)
+		return (1);
+	pthread_mutex_lock(&philo->shared_info->mutex_eat);
+	philo->is_eating = 0;
 	pthread_mutex_unlock(&philo->shared_info->mutex_eat);
 	philo->shared_info->fork_last_owner[philo->left_fork] = philo->id;
 	philo->shared_info->fork_last_owner[philo->right_fork] = philo->id;

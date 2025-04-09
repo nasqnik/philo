@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:03 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/26 16:55:45 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:12:32 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	initialize_philos(t_info *info)
 		info->philos[i].last_meal_time = info->start_time;
 		info->philos[i].meal_count = 0;
 		info->philos[i].shared_info = info;
+		info->philos[i].is_eating = 0;
 		i++;
 	}
 	return (0);

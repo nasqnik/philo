@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:57:30 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/26 16:17:52 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:11:59 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	int					id;
 	int					right_fork;
 	int					left_fork;
+	int					is_eating;
 	long long			last_meal_time;
 	unsigned long long	meal_count;
 	t_info				*shared_info;

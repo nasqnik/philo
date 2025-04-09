@@ -6,7 +6,7 @@
 /*   By: anikitin <anikitin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:37:21 by anikitin          #+#    #+#             */
-/*   Updated: 2025/03/26 14:38:36 by anikitin         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:17:33 by anikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*monitor(void *args)
 			if (info->eat_times > 0 && check_meal_num(info))
 				return (done_meal_num(info), NULL);
 			if (current_time() > (info->philos[i].last_meal_time
-					+ info->time_die))
+					+ info->time_die) && info->philos[i].is_eating == 0)
 				return (philo_death(info, i), NULL);
 			pthread_mutex_unlock(&info->mutex_eat);
 			i++;
